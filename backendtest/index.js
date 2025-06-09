@@ -22,13 +22,13 @@ const main = async () => {
       break;
     }
 
-    const response = await chat.sendMessage({
+    const response = await chat.sendMessageStream({
       message: message,
     });
 
-    console.log("System: ", response.text);
-
-    console.log(chat.history);
+    for await (const chunk of response) {
+      console.log(chunk.text);
+    }
   }
 };
 
