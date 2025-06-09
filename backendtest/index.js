@@ -7,12 +7,11 @@ const rl = readline.createInterface({
 });
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-let history = [];
 
 const main = async () => {
   const chat = ai.chats.create({
     model: "gemini-2.0-flash",
-    history: history,
+    history: [],
   });
 
   while (1) {
@@ -27,7 +26,9 @@ const main = async () => {
       message: message,
     });
 
-    console.log("System: ", response);
+    console.log("System: ", response.text);
+
+    console.log(chat.history);
   }
 };
 
